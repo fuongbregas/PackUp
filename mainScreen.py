@@ -1,4 +1,6 @@
 from tkinter import *
+from tkinter import filedialog
+from tkinter.filedialog import askopenfile
 
 def runMainScreen():
     mainFrame = Tk()
@@ -12,6 +14,28 @@ def runMainScreen():
 
     bottomFrame = Frame(mainFrame)
     bottomFrame.pack(side=BOTTOM)
-    addButton = Button(bottomFrame,text="+",fg="red")
+    addButton = Button(bottomFrame,text="PackUp single file",fg="red", command= browse_file)
+    addButton.pack(side=LEFT)
+    addButton = Button(bottomFrame,text="PackUp whole folder (REQUIRES MORE SPACES)",fg="green", command= browse_folder)
     addButton.pack(side=LEFT)
     mainFrame.mainloop()
+
+def browse_folder():
+    # Allow user to select a directory and store it in global var
+    # called folder_path
+    filename = filedialog.askdirectory()
+    #global folder_path
+    #folder_path.set(filename)
+    #fileLocation = open("folderLocation.txt", "w")
+    #fileLocation.write(filename)
+    print(filename)
+
+def browse_file():
+    #Allow user to search the setting file
+    #global folder_path
+    settingsFile = askopenfile(title='Open Settings File',filetypes=[('Settings File','*.set')])
+    lines = settingsFile.readline()
+    #folderLocation = open("folderLocation.txt", "w")
+    #folderLocation.write(lines)
+    print(lines)
+
